@@ -6,13 +6,13 @@ from base.models import TimeStampedModel
 
 class Movie(TimeStampedModel):
     title = models.CharField(max_length=100, null=False, blank=False, unique=True)
-    year = models.CharField(max_length=4, null=True, blank=False)
+    year = models.CharField(max_length=100, null=True, blank=False)
     rated = models.CharField(max_length=10, null=True, blank=False)
     released = models.DateField(null=True, blank=False)
     runtime = models.CharField(max_length=10, null=True, blank=False)
     genre = models.CharField(max_length=240, null=True, blank=False)
     director = models.CharField(max_length=240, null=True, blank=False)
-    writer = models.CharField(max_length=240, null=True, blank=False)
+    writer = models.TextField(null=True, blank=False)
     actors = models.CharField(max_length=240, null=True, blank=False)
     plot = models.TextField(null=True, blank=False)
     language = models.CharField(max_length=240, null=True, blank=False)
