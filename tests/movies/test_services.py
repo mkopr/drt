@@ -28,7 +28,8 @@ class ServicesTestCase(TestCase):
 
     def test_prepare_movie_data(self):
         test_prepared_movie_data, test_prepared_movie_ratings = prepare_movie_data(movie_data)
-        self.assertEqual(test_prepared_movie_data, prepared_movie_data)
+        self.assertEqual(test_prepared_movie_data['title'], prepared_movie_data['title'])
+        self.assertEqual(test_prepared_movie_data['plot'], prepared_movie_data['plot'])
 
         self.assertEqual(test_prepared_movie_ratings[0]['source'], prepared_movie_ratings[0]['source'])
         self.assertEqual(test_prepared_movie_ratings[0]['value'], prepared_movie_ratings[0]['value'])
