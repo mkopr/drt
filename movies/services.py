@@ -5,7 +5,7 @@ from .request_handler import RequestHandler
 
 def get_movie_data_by_title(title):
     """
-    Make request for movie data via RequestHandler
+    Make request for movie data via RequestHandler.
     :param title: str
     :return: dict
     """
@@ -35,13 +35,19 @@ def prepare_movie_data(data):
     :param data: dict
     :return: dict, dict
     """
-    data = lowercase_dict_keys(data)
-    if data.get('ratings', None):
-        ratings = data.pop('ratings')
 
+    data = lowercase_dict_keys(data)
+    if 'ratings' in data:
+        ratings = data.get('ratings')
+        del data['ratings']
+
+    data = remove_not_applicable_from_data(data)
     if data.get('type', None):
         #  Change key name to non build-in name
         data['typee'] = data.pop('type')
+
+    if data.get('released', None) == '':
+        del data['released']
 
     if data.get('released', None):
         data['released'] = format_date(data['released'])
@@ -51,9 +57,6 @@ def prepare_movie_data(data):
 
     if data.get('imdbvotes', None):
         data['imdbvotes'] = data['imdbvotes'].replace(',', '')
-
-    if data.get('metascore', None) == 'N/A':
-        data['metascore'] = None
 
     prepared_ratings = []
     for rate in ratings:
@@ -82,11 +85,20 @@ def create_rating_object(data, movie):
 
 def lowercase_dict_keys(data):
     """
-    Lowercase all keys in provided dict
+    Lowercase all keys in provided dict.
     :param data: dict
     :return: dict
     """
     return dict((key.lower(), value) for key, value in data.items())
+
+
+def remove_not_applicable_from_data(data):
+    """
+    Remove all 'N/A' values from movie data.
+    :param data: dict
+    :return: dict
+    """
+    return dict((key, value.replace('N/A', '')) for key, value in data.items())
 
 
 def format_date(data):

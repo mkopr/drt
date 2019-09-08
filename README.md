@@ -18,7 +18,7 @@ Service logs in file `drt_logs.log`
 
 
 # enviroment variables
-set `SECRET_KEY`, `DEBUG` and `API_KEY` variables in `.env` file.  
+set `SECRET_KEY`, `DEBUG`, `HOST` and `API_KEY` variables in `.env` file.  
 get `API_KEY` from [omdbapi](http://www.omdbapi.com/apikey.aspx)
  
 Example:
@@ -26,6 +26,7 @@ Example:
 API_KEY=123qwerty!
 SECRET_KEY=123qwerty!
 DEBUG=True
+HOST=0.0.0.0
 ```
 
 # chosen third-party libraries
