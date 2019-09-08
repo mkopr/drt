@@ -29,6 +29,7 @@ class Movie(TimeStampedModel):
     production = models.CharField(max_length=120, null=True, blank=False)
     website = models.URLField(null=True, blank=False)
     response = models.BooleanField(null=True, blank=False)
+    totalseasons = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f'[Movie] id: {self.id}; title: {self.title}'
