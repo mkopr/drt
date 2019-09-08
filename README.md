@@ -14,6 +14,7 @@ $ docker-compose up
 ```
 API documentation URL: `0.0.0.0:8000`  
 Base URL: `0.0.0.0:8000/api`  
+Admin panel: `0.0.0.0:8000/admin`  
 Service logs in file `drt_logs.log`
 
 

@@ -2,7 +2,7 @@ from django.db.models import Count
 
 from django_filters import rest_framework as filters
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import status, views, viewsets
+from rest_framework import status, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
 
@@ -51,15 +51,16 @@ class MovieViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-class TopView(views.APIView):
+class TopViewSet(viewsets.ViewSet):
     """
     API endpoint that allows top to be viewed.
     Add total_comments field in queryset and order by it.
-    Filter by created_before (required) and created_after (required); example: ?created_before=2001&created_after=1977
+    Filter by created_before (required) and created_after (required);
+    example: ?created_before=2001-01-01&created_after=1977-01-01
     """
 
     @swagger_auto_schema(responses={200: TopSerializer(many=True)})
-    def get(self, request):
+    def list(self, request):
         serialized = TopDatesSerializer(data=request.query_params)
         serialized.is_valid(raise_exception=True)
         queryset = Movie.objects.all().filter(
